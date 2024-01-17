@@ -1,12 +1,15 @@
 require('dotenv/config');
 const connectDataBase = require('./src/db/index')
 const express = require('express');
+const AppointmentService = require('./src/services/Appointment.service');
 const app = express()
 
 connectDataBase()
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
 
 app.set('view engine', 'ejs');
 
@@ -17,6 +20,18 @@ app.get('/', (req, res) => {
 
 app.get('/cadastro', (req, res) => {
     res.render('create')
+})
+
+app.post('/create', async (req, res) => {
+    const data = req.body;
+
+    try {
+        await AppointmentService.Create(data);
+        res.status(200).send('Paciente cadastrado!')
+    } catch (error) {
+        res.status(500).send(error)        
+    }
+
 })
 
 app.listen(8080, () => {
