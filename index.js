@@ -34,8 +34,18 @@ app.post('/create', async (req, res) => {
 app.get('/getcalendar', async (req ,res) => {
 
     let consultas = await AppointmentService.GetAll(false)
-
     res.json(consultas)
+})
+
+app.get('/event/:id', async (req, res) => {
+    let appointment = await AppointmentService.GetById(req.params.id)
+    res.render('event', { appo: appointment });
+})
+
+app.post('/finish', async (req, res) => {
+    let id = req.body.id;
+    await AppointmentService.Finish(id);
+    res.redirect('/');
 })
 
 app.listen(8080, () => {
