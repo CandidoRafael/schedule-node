@@ -1,0 +1,40 @@
+# Arquivos temporários
+*~
+
+# Arquivos de compilação
+*.o
+*.out
+
+# Arquivos de sistema
+Thumbs.db
+.DS_Store
+
+# Diretórios de build e output
+/build/
+/dist/
+
+# Ambientes virtuais de Python
+venv/
+env/
+
+# Arquivos de configuração locais
+.env
+
+# Logs e arquivos de registro
+*.log
+log.txt
+
+# Cache e arquivos temporários
+.cache/
+.tmp/
+
+# Dependências e módulos
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de configuração de IDEs
+.idea/
+.vscode/
