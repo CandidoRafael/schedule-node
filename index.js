@@ -9,13 +9,10 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-
 app.set('view engine', 'ejs');
 
-
 app.get('/', (req, res) => {
-    res.send('Rota padrão funcionando');
+    res.render('index')
 });
 
 app.get('/cadastro', (req, res) => {
@@ -32,6 +29,13 @@ app.post('/create', async (req, res) => {
         res.status(500).send(error)        
     }
 
+})
+
+app.get('/getcalendar', async (req ,res) => {
+
+    let consultas = await AppointmentService.GetAll(false)
+
+    res.json(consultas)
 })
 
 app.listen(8080, () => {
