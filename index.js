@@ -48,6 +48,29 @@ app.post('/finish', async (req, res) => {
     res.redirect('/');
 })
 
+app.get('/list', async (req, res) => {
+    
+    let appos = await AppointmentService.GetAll(true);
+    res.render('list', { appos })
+})
+
+app.get('/searchresult', async (req, res) => {
+    try {
+        let appos = await AppointmentService.Search(req.query.search);
+        res.render('list', { appos })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Algo deu errado')
+    }
+})
+
+// let pollTime =  5 * 60000
+
+// setInterval(() => {
+//     console.log('A task rod')
+// }, pollTime)
+
+
 app.listen(8080, () => {
     console.log('Server Rodando na porta 8080')
 });

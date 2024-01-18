@@ -1,0 +1,14 @@
+<h3>Consultas: </h3>
+<hr>
+<form action="/searchresult" method="GET">
+    <input placeholder="Digite CPF..." style="margin-left: 10px; font-size: 1.2rem; padding: .3rem;" type="search" name="search" id="search">
+    <button style=" font-size: 1.2rem; padding: .3rem; color: #FFF; background-color: darkgreen; cursor: pointer;">Pesquisar</button>
+</form>
+<% appos.forEach(appointment => { %>
+    <div style="border: 1px solid #CCC; margin: 10px; padding: .4rem;">
+        <h4><%= appointment.name %></h4>
+        <p>Paciente: <%= appointment.name %></p>
+        <p>Email: <%= appointment.email	%></p>
+        <p>CPF: <%= appointment.cpf%></p>
+    </div>
+<% }) %>  
