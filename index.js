@@ -64,10 +64,12 @@ app.get('/searchresult', async (req, res) => {
     }
 })
 
-let pollTime =  1 * 20000
+let pollTime = 1000 * 60 * 5;
 
 setInterval(async() => {
- await AppointmentService.SendNotification()
+
+ await AppointmentService.SendNotification();
+ 
 }, pollTime)
 
 
