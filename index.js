@@ -64,11 +64,11 @@ app.get('/searchresult', async (req, res) => {
     }
 })
 
-// let pollTime =  5 * 60000
+let pollTime =  1 * 20000
 
-// setInterval(() => {
-//     console.log('A task rod')
-// }, pollTime)
+setInterval(async() => {
+ await AppointmentService.SendNotification()
+}, pollTime)
 
 
 app.listen(8080, () => {

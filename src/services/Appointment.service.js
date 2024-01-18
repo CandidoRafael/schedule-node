@@ -4,11 +4,15 @@ const Appointment = require("../models/Appointment.model");
 class AppointmentService {
 
     async Create(data) {
-
-      await Appointment.create({ 
-        ...data,
-        finished: false 
-     })
+        try {
+            await Appointment.create({ 
+              ...data,
+              finished: false,
+              notified: false
+           })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async GetAll(showFinished) {
@@ -45,12 +49,15 @@ class AppointmentService {
           console.log(error)  
         }
     }
-    // Query => Email
-    // Query => CPF
-
+ 
     async Search(query) {
         let appo = await Appointment.find().or([{ 'email': query }, { 'cpf': query }])
         return appo;
+    }
+
+    async SendNotification() {
+       let appos = await this.GetAll(false);
+       console.log(appos)
     }
 }
 
