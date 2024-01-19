@@ -1,13 +1,23 @@
 require('dotenv/config');
-const connectDataBase = require('./src/db/index')
 const express = require('express');
-const AppointmentService = require('./src/services/Appointment.service');
+const connectDataBase = require('./src/db/index')
 const app = express()
+const http = require('http').createServer(app)
+const io = require('socket.io')(http);
+const AppointmentService = require('./src/services/Appointment.service');
+
 
 connectDataBase()
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+io.on("connection", (socket) => {
+
+   socket.on('cadastro', (data) => {
+        socket.emit('calendar', data)
+   })
+})
 
 app.set('view engine', 'ejs');
 
@@ -73,6 +83,7 @@ setInterval(async() => {
 }, pollTime)
 
 
-app.listen(8080, () => {
+
+http.listen(8080, () => {
     console.log('Server Rodando na porta 8080')
 });
